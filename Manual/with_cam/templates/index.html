@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Control</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Manual Control</h1>
+    </header>
+
+    <section class="control-panel">
+        <div class="robot-options">
+            <h2>Select Robot:</h2>
+            <div class="robot-select">
+                <div id="robot1" class="robot-box selected" onclick="selectRobot(1)">
+                    <img src="{{ url_for('static', filename='images/r1.png') }}" alt="Robot 1">
+                </div>
+                <div id="robot2" class="robot-box" onclick="selectRobot(2)">
+                    <img src="{{ url_for('static', filename='images/r2.png') }}" alt="Robot 2">
+                </div>
+                <div id="robot3" class="robot-box" onclick="selectRobot(3)">
+                    <img src="{{ url_for('static', filename='images/r3.png') }}" alt="Robot 3">
+                </div>
+                <div id="robot4" class="robot-box" onclick="selectRobot(4)">
+                    <img src="{{ url_for('static', filename='images/r4.png') }}" alt="Robot 4">
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-camera-container">
+            <div class="controls">
+                <h2>Control Panel</h2>
+                <div class="control-buttons">
+                    <form action="/control" method="POST">
+                        <button type="submit" name="direction" value="forward" class="control-btn">Front</button>
+                        <button type="submit" name="direction" value="backward" class="control-btn">Back</button>
+                        <button type="submit" name="direction" value="left" class="control-btn">Left</button>
+                        <button type="submit" name="direction" value="right" class="control-btn">Right</button>
+                        <button type="submit" name="direction" value="stop" class="control-btn">Stop</button>
+                    </form>
+                </div>
+                <div class="speed-control">
+                    <label for="speed">Speed:</label>
+                    <input type="range" id="speed" name="speed" min="0" max="100" value="100" class="slider" oninput="updateSpeed(this.value)">
+                </div>
+            </div>
+
+            <div class="camera-view">
+                <h2>Camera View</h2>
+                <img id="camera-feed" src="/video_feed" alt="Camera Feed" width="100%" height="300px">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function selectRobot(robotNumber) {
+            let robots = document.querySelectorAll('.robot-box');
+            robots.forEach(function(robot) {
+                robot.classList.remove('selected');
+            });
+            document.getElementById('robot' + robotNumber).classList.add('selected');
+        }
+
+        function updateSpeed(value) {
+            fetch('/speed', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'speed=' + value
+            });
+        }
+    </script>
+</body>
+</html>

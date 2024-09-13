@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.robot-options, .controls-camera-container {
+    flex: 1;
+    padding: 10px;
+}
+
+.robot-select {
+    display: flex;
+    justify-content: space-between;
+}
+
+.robot-box {
+    padding: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.robot-box.selected {
+    border-color: #333;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.control-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #555;
+}
+
+.speed-control {
+    margin-top: 20px;
+}
+
+.camera-view {
+    margin-top: 20px;
+}

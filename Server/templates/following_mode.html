@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Following Mode</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Following Mode</h1>
+    </header>
+
+    <section class="control-panel">
+        <div class="main-view">
+            <!-- Selected Camera Feed -->
+            <div class="selected-camera">
+                <img id="selected-camera" src="{{ url_for('static', filename='images/c1.png') }}" alt="Selected Camera Feed" width="100%" height="100%">
+            </div>
+
+            <!-- Thumbnail Selection -->
+            <div class="thumbnails">
+                <div class="thumbnail-box" onclick="selectCamera('c1.png', 'r1.png')">
+                    <img src="{{ url_for('static', filename='images/c1.png') }}" alt="Camera 1" class="thumbnail">
+                    <img src="{{ url_for('static', filename='images/r1.png') }}" alt="Robot 1" class="thumbnail-robot">
+                </div>
+                <div class="thumbnail-box" onclick="selectCamera('c2.png', 'r2.png')">
+                    <img src="{{ url_for('static', filename='images/c2.png') }}" alt="Camera 2" class="thumbnail">
+                    <img src="{{ url_for('static', filename='images/r2.png') }}" alt="Robot 2" class="thumbnail-robot">
+                </div>
+                <div class="thumbnail-box" onclick="selectCamera('c3.png', 'r3.png')">
+                    <img src="{{ url_for('static', filename='images/c3.png') }}" alt="Camera 3" class="thumbnail">
+                    <img src="{{ url_for('static', filename='images/r3.png') }}" alt="Robot 3" class="thumbnail-robot">
+                </div>
+                <div class="thumbnail-box" onclick="selectCamera('c4.png', 'r4.png')">
+                    <img src="{{ url_for('static', filename='images/c4.png') }}" alt="Camera 4" class="thumbnail">
+                    <img src="{{ url_for('static', filename='images/r4.png') }}" alt="Robot 4" class="thumbnail-robot">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function selectCamera(cameraImage, robotImage) {
+            document.getElementById('selected-camera').src = "{{ url_for('static', filename='images/') }}" + cameraImage;
+            const robots = document.querySelectorAll('.thumbnail-box');
+            robots.forEach(function(robot) {
+                robot.classList.remove('selected');
+            });
+            const selected = Array.from(document.querySelectorAll('.thumbnail-box')).find(thumb => thumb.querySelector('.thumbnail').src.endsWith(cameraImage));
+            selected.classList.add('selected');
+        }
+
+        // Initialize with default selection
+        document.addEventListener('DOMContentLoaded', function() {
+            selectCamera('c1.png', 'r1.png');
+        });
+    </script>
+</body>
+</html>

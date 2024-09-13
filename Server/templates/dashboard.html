@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swarm Robotics in Disaster Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+</head>
+<body class="light-theme">
+    <header>
+        <h1>Swarm Robotics in Disaster Management</h1>
+        <button id="theme-toggle">Switch to Dark Mode</button>
+    </header>
+
+    <section class="options">
+        <div class="option-card">
+            <img src="{{ url_for('static', filename='images/1.png') }}" alt="Manual Control">
+            <h2>Manual Control</h2>
+            <a href="/manual">Choose</a>
+        </div>
+        <div class="option-card">
+            <img src="{{ url_for('static', filename='images/2.png') }}" alt="Automatic">
+            <h2>Automatic</h2>
+            <a href="/automatic">Choose</a>
+        </div>
+        <div class="option-card">
+            <img src="{{ url_for('static', filename='images/3.png') }}" alt="Following Mode">
+            <h2>Following Mode</h2>
+            <a href="/following">Choose</a>
+        </div>
+    </section>
+
+    <!-- Light and Dark theme script -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-theme');
+            if(body.classList.contains('dark-theme')) {
+                themeToggleBtn.textContent = 'Switch to Light Mode';
+            } else {
+                themeToggleBtn.textContent = 'Switch to Dark Mode';
+            }
+        });
+    </script>
+</body>
+</html>

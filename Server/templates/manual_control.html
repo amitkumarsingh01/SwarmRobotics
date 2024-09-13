@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Control</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Manual Control</h1>
+    </header>
+
+    <section class="control-panel">
+        <div class="robot-options">
+            <h2>Select Robot:</h2>
+            <div class="robot-select">
+                <div id="robot1" class="robot-box selected" onclick="selectRobot(1, 'c1.png')">
+                    <img src="{{ url_for('static', filename='images/r1.png') }}" alt="Robot 1">
+                </div>
+                <div id="robot2" class="robot-box" onclick="selectRobot(2, 'c2.png')">
+                    <img src="{{ url_for('static', filename='images/r2.png') }}" alt="Robot 2">
+                </div>
+                <div id="robot3" class="robot-box" onclick="selectRobot(3, 'c3.png')">
+                    <img src="{{ url_for('static', filename='images/r3.png') }}" alt="Robot 3">
+                </div>
+                <div id="robot4" class="robot-box" onclick="selectRobot(4, 'c4.png')">
+                    <img src="{{ url_for('static', filename='images/r4.png') }}" alt="Robot 4">
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-camera-container">
+            <div class="controls">
+                <h2>Control Panel</h2>
+                <div class="control-buttons">
+                    <button class="control-btn">Front</button>
+                    <button class="control-btn">Back</button>
+                    <button class="control-btn">Stop</button>
+                    <button class="control-btn">Left</button>
+                    <button class="control-btn">Right</button>
+                </div>
+                <div class="speed-control">
+                    <label for="speed">Speed:</label>
+                    <input type="range" id="speed" name="speed" min="0" max="100">
+                </div>
+            </div>
+
+            <div class="camera-view">
+                <h2>Camera View</h2>
+                <img id="camera-feed" src="{{ url_for('static', filename='images/c1.png') }}" alt="Camera Feed" width="100%" height="300px">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Function to change the selected robot and update the camera view
+        function selectRobot(robotNumber, imageName) {
+            // Remove the 'selected' class from all robots
+            let robots = document.querySelectorAll('.robot-box');
+            robots.forEach(function(robot) {
+                robot.classList.remove('selected');
+            });
+
+            // Add the 'selected' class to the clicked robot
+            document.getElementById('robot' + robotNumber).classList.add('selected');
+
+            // Change the camera feed
+            document.getElementById('camera-feed').src = "{{ url_for('static', filename='images/') }}" + imageName;
+        }
+    </script>
+</body>
+</html>
