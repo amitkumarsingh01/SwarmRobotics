@@ -4,7 +4,7 @@ import os
 app = Flask(__name__)
 
 # Directory to store files
-UPLOAD_FOLDER = './public'
+UPLOAD_FOLDER = './pi_communication/public'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 

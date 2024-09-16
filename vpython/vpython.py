@@ -1,4 +1,4 @@
-from vpython import *
+from vpython.vpython import *
 from time import *
 
 b = 0
